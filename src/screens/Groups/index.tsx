@@ -6,6 +6,7 @@ import { HighLigth } from "@components/HighLigth";
 import { GroupCard } from "@components/GroupCard";
 import { FlatList } from "react-native";
 import { EmptyList } from "@components/EmptyList";
+import { Button } from "@components/Button";
 
 export type Group = {
   id: string;
@@ -16,8 +17,8 @@ export type Group = {
 
 export function Groups() {
   const [groups, setGroups] = useState<Group[] | []>([
-    { id: "1", name: "Grupo Feliz" },
-    { id: "2", name: "Grupo Triste" },
+    // { id: "1", name: "Grupo Feliz" },
+    //{ id: "2", name: "Grupo Triste" },
   ]);
 
   return (
@@ -33,6 +34,8 @@ export function Groups() {
         ListEmptyComponent={() => <EmptyList message="Que tal adicionar a primeira turma?" />}
         contentContainerStyle={groups.length === 0 && { flex: 1 }}
       />
+
+      <Button buttonText="Criar Turma" />
     </Container>
   );
 }
