@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ClipboardIcon, Container, Message } from "./style";
+import { Container, Message } from "./style";
 
 type EmptyListProps = {
   message: string;
@@ -9,7 +9,6 @@ type EmptyListProps = {
 export function EmptyList({ message }: EmptyListProps) {
   return (
     <Container>
-      <ClipboardIcon />
       <Message>{message}</Message>
     </Container>
   );
