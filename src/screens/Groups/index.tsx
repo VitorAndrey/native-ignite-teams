@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import { useNavigation } from "@react-navigation/native";
+
 import { Container } from "./styles";
 import { Header } from "@components/Header";
 import { HighLigth } from "@components/HighLigth";
@@ -17,9 +19,15 @@ export type Group = {
 
 export function Groups() {
   const [groups, setGroups] = useState<Group[] | []>([
-    // { id: "1", name: "Grupo Feliz" },
-    //{ id: "2", name: "Grupo Triste" },
+    { id: "1", name: "Grupo Feliz" },
+    { id: "2", name: "Grupo Triste" },
   ]);
+
+  const navigation = useNavigation();
+
+  function handleGoToNewGroup() {
+    navigation.navigate("newgroup");
+  }
 
   return (
     <Container>
@@ -33,9 +41,10 @@ export function Groups() {
         renderItem={({ item }) => <GroupCard group={item} />}
         ListEmptyComponent={() => <EmptyList message="Que tal adicionar a primeira turma?" />}
         contentContainerStyle={groups.length === 0 && { flex: 1 }}
+        showsVerticalScrollIndicator={false}
       />
 
-      <Button buttonText="Criar Turma" />
+      <Button buttonText="Criar Turma" onPress={handleGoToNewGroup} />
     </Container>
   );
 }
