@@ -27,7 +27,7 @@ export function Groups() {
     navigation.navigate("newgroup");
   }
 
-  function handleOpenGroup(group: string) {
+  function handleOpenGroup(group: Group) {
     navigation.navigate("players", { group });
   }
 
@@ -55,9 +55,7 @@ export function Groups() {
       <FlatList
         data={groups}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <GroupCard group={item} onPress={() => handleOpenGroup(item.name)} />
-        )}
+        renderItem={({ item }) => <GroupCard group={item} onPress={() => handleOpenGroup(item)} />}
         ListEmptyComponent={() => <EmptyList message="Que tal adicionar a primeira turma?" />}
         contentContainerStyle={groups.length === 0 && { flex: 1 }}
         showsVerticalScrollIndicator={false}

@@ -49,6 +49,8 @@ export function NewGroup() {
           style={{ marginBottom: 20 }}
           value={newGroupInput}
           onChangeText={setNewGroupInput}
+          onSubmitEditing={handleCreateGroup}
+          returnKeyType="done"
         />
 
         <Button buttonText="Criar" onPress={handleCreateGroup} />

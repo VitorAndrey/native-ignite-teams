@@ -14,12 +14,14 @@ export async function createGroup(newGroupName: string) {
       name: newGroupName,
     };
 
-    const groupAlreadyExists = storedGroups.map((group) => {
-      return group.name.includes(newGroup.name);
-    });
+    if (storedGroups.length !== 0) {
+      const groupAlreadyExists = storedGroups.map((group) => {
+        return group.name.includes(newGroup.name);
+      });
 
-    if (groupAlreadyExists) {
-      throw new AppError("Já existe um grupo cadastrado com esse nome.");
+      if (groupAlreadyExists[0]) {
+        throw new AppError("Já existe um grupo cadastrado com esse nome.");
+      }
     }
 
     const updatedList = JSON.stringify([...storedGroups, newGroup]);
