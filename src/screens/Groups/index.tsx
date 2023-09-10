@@ -38,10 +38,11 @@ export function Groups() {
       setIsLoading(true);
       const data = await getGroups();
       setGroups(data);
-      setIsLoading(false);
     } catch (error) {
       console.log(error);
       Alert.alert("Turmas", "Não foi possível buscar as turmas.");
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -71,7 +72,7 @@ export function Groups() {
           showsVerticalScrollIndicator={false}
         />
       )}
-      <Button buttonText="Criar Turma" onPress={handleGoToNewGroup} />
+      <Button buttonText="Criar nova turma" onPress={handleGoToNewGroup} />
     </Container>
   );
 }
