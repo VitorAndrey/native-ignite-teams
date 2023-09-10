@@ -10,6 +10,7 @@ import { Alert, FlatList } from "react-native";
 import { EmptyList } from "@components/EmptyList";
 import { Button } from "@components/Button";
 import { getGroups } from "../../storage/group/getGroups";
+import { Loading } from "@components/Loading";
 
 export type Group = {
   id: string;
@@ -19,6 +20,7 @@ export type Group = {
 };
 
 export function Groups() {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [groups, setGroups] = useState<Group[] | []>([]);
 
   const navigation = useNavigation();
@@ -33,8 +35,10 @@ export function Groups() {
 
   async function fetchGroups() {
     try {
+      setIsLoading(true);
       const data = await getGroups();
       setGroups(data);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
       Alert.alert("Turmas", "Não foi possível buscar as turmas.");
@@ -53,15 +57,20 @@ export function Groups() {
 
       <HighLigth title="Turmas" subtitle="jogue com sua turma" />
 
-      <FlatList
-        data={groups}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <GroupCard group={item} onPress={() => handleOpenGroup(item)} />}
-        ListEmptyComponent={() => <EmptyList message="Que tal adicionar a primeira turma?" />}
-        contentContainerStyle={groups.length === 0 && { flex: 1 }}
-        showsVerticalScrollIndicator={false}
-      />
-
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <FlatList
+          data={groups}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <GroupCard group={item} onPress={() => handleOpenGroup(item)} />
+          )}
+          ListEmptyComponent={() => <EmptyList message="Que tal adicionar a primeira turma?" />}
+          contentContainerStyle={groups.length === 0 && { flex: 1 }}
+          showsVerticalScrollIndicator={false}
+        />
+      )}
       <Button buttonText="Criar Turma" onPress={handleGoToNewGroup} />
     </Container>
   );
