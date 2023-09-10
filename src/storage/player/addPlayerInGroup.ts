@@ -4,9 +4,9 @@ import { PLAYER_COLLETCTION } from "../storageConfig";
 import { PlayerStorageDTO } from "./PlayerStorageDTO";
 import { getPlayersInGroup } from "./getPlayersInGroup";
 
-export async function addPlayerInGroup(newPlayer: PlayerStorageDTO, group: string) {
+export async function addPlayerInGroup(newPlayer: PlayerStorageDTO, groupId: string) {
   try {
-    const storedPlayers = await getPlayersInGroup(group);
+    const storedPlayers = await getPlayersInGroup(groupId);
 
     const playerAlreadyExists = storedPlayers.filter((player) => player.name === newPlayer.name);
 
@@ -16,7 +16,7 @@ export async function addPlayerInGroup(newPlayer: PlayerStorageDTO, group: strin
 
     const storage = JSON.stringify([...storedPlayers, newPlayer]);
 
-    await AsyncStorageHook.setItem(`${PLAYER_COLLETCTION}-${group}`, storage);
+    await AsyncStorageHook.setItem(`${PLAYER_COLLETCTION}-${groupId}`, storage);
   } catch (error) {
     throw error;
   }

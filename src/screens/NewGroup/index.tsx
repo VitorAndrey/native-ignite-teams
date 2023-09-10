@@ -22,8 +22,8 @@ export function NewGroup() {
       }
 
       const newGroup = newGroupInput;
-      await createGroup(newGroup);
-      navigation.navigate("players", { group: newGroup });
+      const createdGroup = await createGroup(newGroup);
+      navigation.navigate("players", { group: createdGroup });
       setNewGroupInput("");
     } catch (error) {
       if (error instanceof AppError) {
