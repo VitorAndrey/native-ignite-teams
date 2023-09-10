@@ -6,7 +6,7 @@ import { Container } from "./styles";
 import { Header } from "@components/Header";
 import { HighLigth } from "@components/HighLigth";
 import { GroupCard } from "@components/GroupCard";
-import { FlatList } from "react-native";
+import { Alert, FlatList } from "react-native";
 import { EmptyList } from "@components/EmptyList";
 import { Button } from "@components/Button";
 import { getGroups } from "../../storage/group/getGroups";
@@ -37,6 +37,7 @@ export function Groups() {
       setGroups(data);
     } catch (error) {
       console.log(error);
+      Alert.alert("Turmas", "Não foi possível buscar as turmas.");
     }
   }
 
